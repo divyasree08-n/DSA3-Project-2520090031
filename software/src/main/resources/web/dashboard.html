@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Resume-Job Matcher dashboard for comparing a resume to a job description and measuring candidate fit."
+    />
+    <title>Dashboard | Resume-Job Matcher</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script defer src="js/main.js"></script>
+    <script defer src="js/auth.js"></script>
+    <script defer src="js/matcher.js"></script>
+  </head>
+  <body class="page-dark">
+    <header class="topbar">
+      <div class="container nav-wrap">
+        <div class="brand">RESUME-JOB MATCHER</div>
+        <div class="nav-right">
+          <span id="userLabel" class="user-label">Signed in as Guest</span>
+          <button id="logoutBtn" class="btn btn-danger" type="button">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-shell">
+      <div class="dashboard-grid container">
+        <section class="panel">
+          <h2>Resume Text</h2>
+          <textarea id="resumeText" rows="8" placeholder="Paste resume skills..."></textarea>
+
+          <h2>Job Description</h2>
+          <textarea id="jobText" rows="8" placeholder="Paste job requirements..."></textarea>
+
+          <button id="matchBtn" class="btn btn-primary" type="button">Find Match</button>
+          <p class="small-hint">Tip: separate skills with spaces</p>
+        </section>
+
+        <section class="panel results-panel">
+          <h2>Match Result</h2>
+          <div id="emptyState" class="empty-state">Enter a resume and job description, then click Find Match.</div>
+          <div id="resultContent" class="result-content hidden">
+            <div id="scoreDisplay" class="score-big">0.0%</div>
+
+            <div class="list-section">
+              <h3>Matched Skills</h3>
+              <ul id="matchedList"></ul>
+            </div>
+
+            <div class="list-section">
+              <h3>Missing Skills</h3>
+              <ul id="missingList"></ul>
+            </div>
+
+            <div class="list-section">
+              <h3>Extra Skills in Resume</h3>
+              <ul id="extraList"></ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>Team 1, Section 12 — DSA-3 (25CS2103E)</p>
+      </div>
+    </footer>
+  </body>
+</html>

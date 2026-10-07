@@ -1,0 +1,645 @@
+================================================================================
+RESUME-JOB MATCHING & TALENT MARKETPLACE ENGINE
+DSA-3 (25CS2103E) — Team 1, Section 12
+Complete Command Reference and Procedure Guide
+================================================================================
+
+PROJECT LOCATION:
+  C:\2nd year 1st sem\DSA\project
+
+MAIN SOFTWARE FOLDER:
+  C:\2nd year 1st sem\DSA\project\software
+
+================================================================================
+TABLE OF CONTENTS
+================================================================================
+
+  1. Prerequisites and Environment Check
+  2. Navigate to Project Directory
+  3. Clean and Build the Project
+  4. Run the Automated Terminal Demo (Main.java)
+  5. Run the Interactive CLI Demo (Demo.java)
+  6. Run the Web UI Server (WebServer.java)
+  7. Full Presentation Flow (10 minutes)
+  8. Troubleshooting
+  9. Shutdown and Cleanup
+ 10. Quick Reference Card
+
+================================================================================
+1. PREREQUISITES AND ENVIRONMENT CHECK
+================================================================================
+
+Before running anything, verify your environment.
+
+Open PowerShell or Command Prompt (cmd) and run these commands ONE AT A TIME.
+
+--------------------------------------------------------------------------------
+1.1 Check Java version
+--------------------------------------------------------------------------------
+
+    java -version
+
+Expected output:
+    openjdk version "17.0.x"  or  openjdk version "25.0.x"
+    OpenJDK Runtime Environment ...
+    OpenJDK 64-Bit Server VM ...
+
+--------------------------------------------------------------------------------
+1.2 Check Java compiler version
+--------------------------------------------------------------------------------
+
+    javac -version
+
+Expected output:
+    javac 17.0.x   or   javac 25.0.x
+
+--------------------------------------------------------------------------------
+1.3 Check Maven version
+--------------------------------------------------------------------------------
+
+    mvn -version
+
+Expected output:
+    Apache Maven 3.8.x  or  3.9.x
+    Maven home: ...
+    Java version: 17.0.x or 25.0.x
+    Java home: ...
+
+The Java version shown by Maven MUST match the version shown by javac.
+
+--------------------------------------------------------------------------------
+1.4 Verify JAVA_HOME (Windows)
+--------------------------------------------------------------------------------
+
+In PowerShell:
+
+    echo $env:JAVA_HOME
+
+In Command Prompt:
+
+    echo %JAVA_HOME%
+
+Expected output (example):
+    C:\Program Files\Eclipse Adoptium\jdk-17.x.x-hotspot
+or
+    C:\dev\tools\jdk-25_windows-x64_bin\jdk-25.0.2
+
+If JAVA_HOME is empty, see Section 8 (Troubleshooting).
+
+================================================================================
+2. NAVIGATE TO PROJECT DIRECTORY
+================================================================================
+
+IMPORTANT: The project path contains spaces. Always wrap the path in double quotes.
+
+--------------------------------------------------------------------------------
+2.1 From any location
+--------------------------------------------------------------------------------
+
+    cd /d "C:\2nd year 1st sem\DSA\project"
+
+--------------------------------------------------------------------------------
+2.2 Navigate to software folder
+--------------------------------------------------------------------------------
+
+    cd /d "C:\2nd year 1st sem\DSA\project\software"
+
+--------------------------------------------------------------------------------
+2.3 Verify you are in the right place
+--------------------------------------------------------------------------------
+
+    dir
+
+You should see:
+    pom.xml
+    src\
+    README.md
+    (target\ if previously built)
+
+If you do NOT see pom.xml, you are in the wrong folder.
+
+================================================================================
+3. CLEAN AND BUILD THE PROJECT
+================================================================================
+
+Do this at least once after cloning, and after any code change.
+
+--------------------------------------------------------------------------------
+3.1 Clean previous build and compile
+--------------------------------------------------------------------------------
+
+    mvn clean compile
+
+Expected output ends with:
+
+    [INFO] BUILD SUCCESS
+    [INFO] Total time:  X.XXX s
+
+If you see BUILD FAILURE, go to Section 8 (Troubleshooting).
+
+--------------------------------------------------------------------------------
+3.2 Optional: Full package (creates JAR file)
+--------------------------------------------------------------------------------
+
+    mvn package
+
+Creates:
+    target\resume-job-matcher-1.0.0.jar
+
+================================================================================
+4. RUN THE AUTOMATED TERMINAL DEMO (Main.java)
+================================================================================
+
+Purpose: Prints all 6 Course Outcomes (CO1-CO6) sequentially.
+No user input required. Best for screenshots and grading evidence.
+
+--------------------------------------------------------------------------------
+4.1 Command
+--------------------------------------------------------------------------------
+
+    mvn exec:java "-Dexec.mainClass=com.klh.dsa.Main"
+
+--------------------------------------------------------------------------------
+4.2 Expected Output (sample)
+--------------------------------------------------------------------------------
+
+    ============================================================
+      Resume-Job Matching & Talent Marketplace Engine
+      DSA-3 | 25CS2103E | Java 17
+    ============================================================
+
+    --- CO1 - Problem Classification ---
+    Find exact Java keyword matches    -> EXACT_KEYWORD_SEARCH        : KMP
+    Fuzzy Python skill match           -> FUZZY_SKILL_MATCH           : Levenshtein Edit Distance
+    ...
+
+    --- CO2 - String Algorithms ---
+    KMP matches: [0, 31]
+    Z-function matches: [0, 31]
+    Rabin-Karp matches: [0, 31]
+    ...
+
+    --- CO3 - Dynamic Programming ---
+    Edit distance (kitten/sitting): 3
+    Edit similarity (Java/Java): 1.0
+    ...
+
+    --- CO4 - Network Flow and Assignment ---
+    Edmonds-Karp max flow: 23
+    Dinic max flow: 23
+    Hungarian assignment: [1, 0, 2]
+    ...
+
+    --- CO5 - NP Approximation and Greedy Algorithms ---
+    2-approximate vertex cover: [0, 1, 2, 3]
+    0/1 knapsack maximum value: 7
+    ...
+
+    --- CO6 - Randomized and Parallel Algorithms ---
+    Miller-Rabin: 104729 prime = true, 104730 prime = false
+    Reservoir sample of 3: [5, 2, 3]
+    ...
+
+    --- Full Resume-to-Job Matching Demo ---
+    Bob -> Data Scientist (100.0%)
+    Carol -> Frontend Developer (100.0%)
+    Alice -> Java Backend Engineer (87.5%)
+    ...
+
+    ALL 6 COURSE OUTCOMES DEMONSTRATED
+    [INFO] BUILD SUCCESS
+
+--------------------------------------------------------------------------------
+4.3 Save output to file for report
+--------------------------------------------------------------------------------
+
+    mvn exec:java "-Dexec.mainClass=com.klh.dsa.Main" > ..\docs\demo-output.txt
+
+================================================================================
+5. RUN THE INTERACTIVE CLI DEMO (Demo.java)
+================================================================================
+
+Purpose: Menu-driven terminal interface. User types inputs and sees live output.
+Best for viva/presentation where instructor may ask to test specific options.
+
+--------------------------------------------------------------------------------
+5.1 Command
+--------------------------------------------------------------------------------
+
+    mvn exec:java "-Dexec.mainClass=com.klh.dsa.Demo"
+
+--------------------------------------------------------------------------------
+5.2 Menu Appears
+--------------------------------------------------------------------------------
+
+    ============================================================
+      Resume-Job Matching - Interactive Demo
+      DSA-3 | 25CS2103E | Team 1, Section 12
+    ============================================================
+
+    1  ->  CO1: Classify a query (which algorithm?)
+    2  ->  CO2: Search a pattern in text (KMP/RK/Z)
+    3  ->  CO3: Edit distance between two strings
+    4  ->  CO4: Optimal candidate-job assignment
+    5  ->  CO5: 0/1 Knapsack (budget-constrained hiring)
+    6  ->  CO6: Miller-Rabin primality test
+    7  ->  FULL: Match resumes to jobs
+    0  ->  Exit
+    Select an option:
+
+--------------------------------------------------------------------------------
+5.3 Sample Test Sequence (type these one at a time)
+--------------------------------------------------------------------------------
+
+OPTION 1 — CO1 Classification:
+    Input: 1
+    Input: Find Java resumes
+
+OPTION 2 — CO2 String Search:
+    Input: 2
+    Input text: hello world python java
+    Input pattern: python
+
+OPTION 3 — CO3 Edit Distance:
+    Input: 3
+    String A: python
+    String B: pyhton
+
+OPTION 4 — CO4 Assignment (3 candidates x 3 jobs):
+    Input: 4
+    N: 3
+    Cell values (one per line):
+        0.9
+        0.5
+        0.3
+        0.4
+        0.8
+        0.6
+        0.2
+        0.5
+        0.95
+
+OPTION 5 — CO5 Knapsack:
+    Input: 5
+    Items: 4
+    Item 0 weight: 2
+    Item 0 value:  3
+    Item 1 weight: 3
+    Item 1 value:  4
+    Item 2 weight: 4
+    Item 2 value:  5
+    Item 3 weight: 5
+    Item 3 value:  6
+    Capacity: 5
+
+OPTION 6 — CO6 Primality:
+    Input: 6
+    Number: 104729
+    Witnesses k: 5
+
+OPTION 7 — Full Matching:
+    Input: 7
+    Candidates: 3
+    Candidate 1 name: Alice
+    Candidate 1 resume: Java Spring Boot SQL DSA git
+    Candidate 2 name: Bob
+    Candidate 2 resume: Python machine learning NLP tensorflow
+    Candidate 3 name: Carol
+    Candidate 3 resume: JavaScript React Node MongoDB REST
+    Jobs: 3
+    Job 1 title: Java Backend Engineer
+    Job 1 skills: Java Spring Boot SQL REST DSA git
+    Job 2 title: Data Scientist
+    Job 2 skills: Python machine learning NLP deep learning
+    Job 3 title: Frontend Developer
+    Job 3 skills: JavaScript React HTML CSS REST
+
+Exit:
+    Input: 0
+
+================================================================================
+6. RUN THE WEB UI SERVER (WebServer.java)
+================================================================================
+
+Purpose: Full browser-based UI with login, register, and live resume-job matching.
+Best for impressive visual demonstration. Requires web layer files to exist.
+
+--------------------------------------------------------------------------------
+6.1 Start the server
+--------------------------------------------------------------------------------
+
+In the software folder, run:
+
+    mvn exec:java "-Dexec.mainClass=com.klh.dsa.web.WebServer"
+
+Expected output:
+
+    ============================================================
+      Resume-Job Matcher Web UI
+      Server started at http://localhost:8080
+      Admin credentials: admin / admin@123
+    ============================================================
+
+LEAVE THIS TERMINAL OPEN. The server must keep running.
+
+--------------------------------------------------------------------------------
+6.2 Open browser
+--------------------------------------------------------------------------------
+
+Open Chrome, Firefox, or Edge.
+
+Go to:
+
+    http://localhost:8080
+
+--------------------------------------------------------------------------------
+6.3 Login credentials
+--------------------------------------------------------------------------------
+
+Pre-seeded admin account:
+    Username: admin
+    Password: admin@123
+    Role:     ADMIN
+
+You may also click Register to create a new account.
+
+--------------------------------------------------------------------------------
+6.4 Test the workflow
+--------------------------------------------------------------------------------
+
+Step 1: Click "Login" or "Register"
+Step 2: Login as admin / admin@123
+Step 3: You land on Dashboard
+Step 4: Paste into "Resume Text":
+        Java Spring Boot SQL DSA git
+
+Step 5: Paste into "Job Description":
+        Java Spring Boot SQL REST DSA git
+
+Step 6: Click "Find Match"
+Step 7: View results:
+        Match Score:   87.5%
+        Matched Skills: java, spring, sql, dsa, git
+        Missing Skills: rest
+
+Step 8: Click "Logout"
+
+--------------------------------------------------------------------------------
+6.5 Test API endpoints (optional)
+--------------------------------------------------------------------------------
+
+In another terminal, run:
+
+    curl http://localhost:8080/api/health
+
+Expected: {"status":"OK"}
+
+    curl -X POST http://localhost:8080/api/login ^
+      -H "Content-Type: application/json" ^
+      -d "{\"username\":\"admin\",\"password\":\"admin@123\"}"
+
+Expected: {"success":true,"token":"...","role":"ADMIN","username":"admin"}
+
+--------------------------------------------------------------------------------
+6.6 Stop the server
+--------------------------------------------------------------------------------
+
+In the server terminal, press:
+
+    Ctrl + C
+
+================================================================================
+7. FULL PRESENTATION FLOW (10 MINUTES)
+================================================================================
+
+Recommended sequence for viva.
+
+PREREQUISITES (do 5 minutes before):
+    - Open Terminal 1: web server
+    - Open Terminal 2: CLI demo
+    - Open VS Code with project
+    - Open browser to http://localhost:8080
+    - Fullscreen everything
+
+--------------------------------------------------------------------------------
+Terminal 1 — Web Server (keep running)
+--------------------------------------------------------------------------------
+
+    cd /d "C:\2nd year 1st sem\DSA\project\software"
+    mvn exec:java "-Dexec.mainClass=com.klh.dsa.web.WebServer"
+
+--------------------------------------------------------------------------------
+Terminal 2 — CLI Demo (run when needed)
+--------------------------------------------------------------------------------
+
+    cd /d "C:\2nd year 1st sem\DSA\project\software"
+    mvn exec:java "-Dexec.mainClass=com.klh.dsa.Demo"
+
+--------------------------------------------------------------------------------
+Presentation Sequence
+--------------------------------------------------------------------------------
+
+Minute 0-1  : Introduction slide
+Minute 1-2  : Show VS Code folder structure
+Minute 2-4  : Browser demo (login, paste, match, view score)
+Minute 4-6  : Switch to CLI Demo, walk through options 1-7
+Minute 6-8  : Run automated Main.java, point at CO sections
+Minute 8-10 : Code walkthrough (KMP.java, MatchingEngine.java) + Q&A
+
+================================================================================
+8. TROUBLESHOOTING
+================================================================================
+
+Problem: "No compiler is provided in this environment"
+Cause:   Maven is using a JRE, not a JDK.
+Fix:
+    1. Verify JAVA_HOME points to a JDK folder (contains bin\javac.exe)
+    2. In cmd:  echo %JAVA_HOME%
+    3. Ensure %JAVA_HOME%\bin is FIRST in PATH
+    4. Restart all terminals
+    5. If still broken, edit C:\dev\tools\apache-maven-3.9.12\bin\mvn.cmd
+       and add as line 1:
+       set JAVA_HOME=C:\dev\tools\jdk-25_windows-x64_bin\jdk-25.0.2
+
+--------------------------------------------------------------------------------
+
+Problem: "Unknown lifecycle phase .mainClass=com.klh.dsa.Demo"
+Cause:   PowerShell stripped the -D prefix.
+Fix:     Always quote the -D argument:
+             mvn exec:java "-Dexec.mainClass=com.klh.dsa.Demo"
+         Or use cmd instead of PowerShell.
+
+--------------------------------------------------------------------------------
+
+Problem: "Port 8080 already in use"
+Cause:   Another app or previous server still running.
+Fix:
+    1. Close any previous WebServer terminal
+    2. Or find and kill the process:
+       netstat -ano | findstr :8080
+       taskkill /PID <pid> /F
+    3. Or change the port in WebServer.java
+
+--------------------------------------------------------------------------------
+
+Problem: "mvn clean compile" fails with "cannot find symbol"
+Cause:   Missing file or wrong method signature.
+Fix:
+    1. Verify all files exist: dir /s src\main\java
+    2. Check the error message for the missing class
+    3. Ensure the class file exists and package declaration matches folder
+
+--------------------------------------------------------------------------------
+
+Problem: Web UI shows blank page
+Cause:   Static files not found.
+Fix:
+    1. Verify src/main/resources/web/ contains index.html
+    2. Verify WebServer.java serves from classpath /web/
+    3. Rebuild: mvn clean compile
+    4. Restart the server
+
+--------------------------------------------------------------------------------
+
+Problem: "BUILD FAILURE" on first run
+Cause:   Missing Maven dependencies (no internet, corporate proxy).
+Fix:
+    1. Check internet connection
+    2. Try again: mvn clean compile -U
+    3. If behind proxy, configure settings.xml in C:\Users\<user>\.m2\
+
+================================================================================
+9. SHUTDOWN AND CLEANUP
+================================================================================
+
+--------------------------------------------------------------------------------
+9.1 Stop the web server
+--------------------------------------------------------------------------------
+
+In the server terminal:
+    Ctrl + C
+
+--------------------------------------------------------------------------------
+9.2 Stop the CLI demo
+--------------------------------------------------------------------------------
+
+If stuck, press:
+    Ctrl + C
+
+--------------------------------------------------------------------------------
+9.3 Clean build output
+--------------------------------------------------------------------------------
+
+    cd /d "C:\2nd year 1st sem\DSA\project\software"
+    mvn clean
+
+This deletes the target\ folder.
+
+--------------------------------------------------------------------------------
+9.4 Full rebuild
+--------------------------------------------------------------------------------
+
+    mvn clean compile
+
+================================================================================
+10. QUICK REFERENCE CARD
+================================================================================
+
+--------------------------------------------------------------------------------
+BUILD
+--------------------------------------------------------------------------------
+
+    cd /d "C:\2nd year 1st sem\DSA\project\software"
+    mvn clean compile
+
+--------------------------------------------------------------------------------
+RUN — AUTOMATED DEMO (CO1-CO6)
+--------------------------------------------------------------------------------
+
+    mvn exec:java "-Dexec.mainClass=com.klh.dsa.Main"
+
+--------------------------------------------------------------------------------
+RUN — INTERACTIVE CLI
+--------------------------------------------------------------------------------
+
+    mvn exec:java "-Dexec.mainClass=com.klh.dsa.Demo"
+
+--------------------------------------------------------------------------------
+RUN — WEB UI
+--------------------------------------------------------------------------------
+
+    mvn exec:java "-Dexec.mainClass=com.klh.dsa.web.WebServer"
+
+Then open: http://localhost:8080
+
+--------------------------------------------------------------------------------
+RUN — ALL THREE (three terminals)
+--------------------------------------------------------------------------------
+
+Terminal 1:
+    cd /d "C:\2nd year 1st sem\DSA\project\software"
+    mvn exec:java "-Dexec.mainClass=com.klh.dsa.web.WebServer"
+
+Terminal 2:
+    cd /d "C:\2nd year 1st sem\DSA\project\software"
+    mvn exec:java "-Dexec.mainClass=com.klh.dsa.Demo"
+
+Terminal 3:
+    cd /d "C:\2nd year 1st sem\DSA\project\software"
+    mvn exec:java "-Dexec.mainClass=com.klh.dsa.Main"
+
+--------------------------------------------------------------------------------
+PACKAGE (create JAR)
+--------------------------------------------------------------------------------
+
+    mvn package
+    java -jar target\resume-job-matcher-1.0.0.jar
+
+--------------------------------------------------------------------------------
+CLEAN
+--------------------------------------------------------------------------------
+
+    mvn clean
+
+--------------------------------------------------------------------------------
+TEST
+--------------------------------------------------------------------------------
+
+    mvn test
+
+--------------------------------------------------------------------------------
+GIT
+--------------------------------------------------------------------------------
+
+    cd /d "C:\2nd year 1st sem\DSA\project"
+    git status
+    git add .
+    git commit -m "Your message"
+    git push origin main
+
+================================================================================
+IMPORTANT REMINDERS
+================================================================================
+
+1. ALWAYS wrap the project path in double quotes because it contains spaces.
+
+2. ALWAYS run mvn commands ONE PER LINE. Do not chain with >> in PowerShell.
+
+3. ALWAYS quote -D arguments in PowerShell:
+       "-Dexec.mainClass=com.klh.dsa.Demo"
+
+4. NEVER close the Web UI server terminal while doing a demo. Press Ctrl+C to
+   stop it only when done.
+
+5. The web server uses port 8080. Only one server can run at a time.
+
+6. Default admin credentials: admin / admin@123
+
+7. Build output goes to the target\ folder. Run mvn clean to delete it.
+
+8. For presentations, use TWO or THREE terminals so you can switch between
+   demos without stopping and restarting.
+
+================================================================================
+END OF COMMAND REFERENCE
+================================================================================
