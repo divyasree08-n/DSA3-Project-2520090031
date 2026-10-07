@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Create an account for the Resume-Job Matcher to access matching features."
+    />
+    <title>Create Account | Resume-Job Matcher</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script defer src="js/main.js"></script>
+    <script defer src="js/auth.js"></script>
+  </head>
+  <body class="page-dark">
+    <header class="topbar">
+      <div class="container nav-wrap">
+        <div class="brand">RESUME-JOB MATCHER</div>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="login.html">Login</a>
+          <a href="register.html" class="active">Register</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="auth-page">
+      <div class="auth-shell">
+        <div class="card auth-card">
+          <h1>Create Account</h1>
+          <form id="registerForm" novalidate>
+            <div class="field-group">
+              <label for="registerUsername">Username</label>
+              <input id="registerUsername" name="username" type="text" minlength="3" required />
+            </div>
+            <div class="field-group">
+              <label for="registerPassword">Password</label>
+              <input id="registerPassword" name="password" type="password" minlength="6" required />
+            </div>
+            <div class="field-group">
+              <label for="registerConfirmPassword">Confirm Password</label>
+              <input id="registerConfirmPassword" name="confirmPassword" type="password" minlength="6" required />
+            </div>
+            <div class="field-group">
+              <label for="registerRole">Role</label>
+              <select id="registerRole" name="role">
+                <option value="USER" selected>USER</option>
+                <option value="ADMIN">ADMIN</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+          </form>
+          <p id="registerError" class="form-message error-message" aria-live="polite"></p>
+          <p id="registerSuccess" class="form-message success-message" aria-live="polite"></p>
+          <p class="form-hint">Already have an account? <a href="login.html">Sign In</a></p>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>Team 1, Section 12 — DSA-3 (25CS2103E)</p>
+      </div>
+    </footer>
+  </body>
+</html>
